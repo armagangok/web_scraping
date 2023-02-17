@@ -3,24 +3,26 @@ package main
 import (
 	"fmt"
 	"net/http"
-
 	"github.com/PuerkitoBio/goquery"
+	"armaganModules/core"
 )
 
 func main() {
-	fetchTop250MoviesFromImd()
-
+	fetchDailyHoroscope("yay")
 }
 
-func fetchTop250MoviesFromImd() {
-	response, httpError := http.Get("https://www.imdb.com/chart/top")
+func fetchDailyHoroscope(signName string) {
+
+	url := core.GetUrl(signName)
+
+	response, httpError := http.Get(url)
 
 	if response.StatusCode != 200 {
 		fmt.Println("ERROR: ", response.StatusCode)
 	} else {
 		document, readerError := goquery.NewDocumentFromReader(response.Body)
-		document.Find(".lister-list").Each(func(i int, selection *goquery.Selection) {
-			title := selection.Find("a").Text()
+		document.Find(".detail-content-inner").Each(func(i int, selection *goquery.Selection) {
+			title := selection.Find("p").Text()
 			fmt.Println(title)
 
 			print(readerError)
@@ -29,3 +31,4 @@ func fetchTop250MoviesFromImd() {
 
 	print(httpError)
 }
+
