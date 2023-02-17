@@ -2,47 +2,47 @@ package main
 
 import (
 	"armaganModules/core"
+	"armaganModules/data/service"
 	"fmt"
-	"net/http"
-
 	// "reflect"
-
-	"github.com/PuerkitoBio/goquery"
 )
 
 func main() {
 	var first string
 
 	for {
+		printMenu()
+		fmt.Scanln(&first)
 
-		printMenu(first)
-
-		switch first {
-		case "0":
-			fetchDailyHoroscope(string(core.Aslan))
-		case "1":
-			fetchDailyHoroscope(string(core.Yay))
-		case "2":
-			fetchDailyHoroscope(string(core.Kova))
-		case "3":
-			fetchDailyHoroscope(string(core.Oglak))
-		case "4":
-			fetchDailyHoroscope(string(core.Ikizler))
-		case "5":
-			fetchDailyHoroscope(string(core.Yengec))
-		case "6":
-			fetchDailyHoroscope(string(core.Basak))
-		case "7":
-			fetchDailyHoroscope(string(core.Oglak))
-		case "8":
-			fetchDailyHoroscope(string(core.Oglak))
-		}
+		chooseHoroscope(first)
 	}
 
-	// fetchDailyHoroscope("yay")
 }
 
-func printMenu(userChoice string) {
+func chooseHoroscope(first string) {
+	switch first {
+	case "0":
+		service.fetchDailyHoroscope()
+	case "1":
+		service.fetchDailyHoroscope()
+	case "2":
+		service.fetchDailyHoroscope(string(core.Kova))
+	case "3":
+		service.fetchDailyHoroscope(string(core.Oglak))
+	case "4":
+		service.fetchDailyHoroscope(string(core.Ikizler))
+	case "5":
+		service.fetchDailyHoroscope(string(core.Yengec))
+	case "6":
+		service.fetchDailyHoroscope(string(core.Basak))
+	case "7":
+		service.fetchDailyHoroscope(string(core.Oglak))
+	case "8":
+		service.fetchDailyHoroscope(string(core.Oglak))
+	}
+}
+
+func printMenu() {
 	fmt.Println("[0] Aslan ")
 	fmt.Println("[1] Yay")
 	fmt.Println("[2] Oglak")
@@ -56,31 +56,5 @@ func printMenu(userChoice string) {
 	fmt.Println("[10] Koc")
 	fmt.Println("[10] Boga")
 	fmt.Println("[Q/q/e] Exit")
-	getUserInput(userChoice)
-}
 
-func getUserInput(first string) {
-	fmt.Scanln(&first)
-}
-
-func fetchDailyHoroscope(signName string) {
-
-	url := core.GetUrl(signName)
-
-	response, httpError := http.Get(url)
-
-	if response.StatusCode != 200 {
-		fmt.Println("ERROR: ", response.StatusCode)
-	} else {
-		document, readerError := goquery.NewDocumentFromReader(response.Body)
-		document.Find(".detail-content-inner").Each(func(i int, selection *goquery.Selection) {
-			title := selection.Find("p").Text()
-
-			fmt.Println(title)
-
-			print(readerError)
-		})
-	}
-
-	print(httpError)
 }
