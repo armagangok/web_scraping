@@ -2,21 +2,18 @@ package service
 
 import (
 	"armaganModules/core"
+	"armaganModules/data/contract"
 	"fmt"
 	"net/http"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
-type ServiceContract interface {
-	fetchDailyHoroscope(horoscopeType string)
-}
-
 type ServiceImp struct {
-	ServiceContract
+	contract.ServiceContract
 }
 
-func fetchDailyHoroscope(horoscopeType string) {
+func FetchDailyHoroscope(horoscopeType string) {
 
 	url := core.GetUrl(horoscopeType)
 

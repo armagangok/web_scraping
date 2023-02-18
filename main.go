@@ -22,23 +22,29 @@ func main() {
 func chooseHoroscope(first string) {
 	switch first {
 	case "0":
-		service.fetchDailyHoroscope()
+		service.FetchDailyHoroscope(string(core.Aslan))
 	case "1":
-		service.fetchDailyHoroscope()
+		service.FetchDailyHoroscope(string(core.Yay))
 	case "2":
-		service.fetchDailyHoroscope(string(core.Kova))
+		service.FetchDailyHoroscope(string(core.Oglak))
 	case "3":
-		service.fetchDailyHoroscope(string(core.Oglak))
+		service.FetchDailyHoroscope(string(core.Kova))
 	case "4":
-		service.fetchDailyHoroscope(string(core.Ikizler))
+		service.FetchDailyHoroscope(string(core.Ikizler))
 	case "5":
-		service.fetchDailyHoroscope(string(core.Yengec))
+		service.FetchDailyHoroscope(string(core.Yengec))
 	case "6":
-		service.fetchDailyHoroscope(string(core.Basak))
+		service.FetchDailyHoroscope(string(core.Basak))
 	case "7":
-		service.fetchDailyHoroscope(string(core.Oglak))
+		service.FetchDailyHoroscope(string(core.Balik))
 	case "8":
-		service.fetchDailyHoroscope(string(core.Oglak))
+		service.FetchDailyHoroscope(string(core.Akrep))
+	case "9":
+		service.FetchDailyHoroscope(string(core.Terazi))
+	case "10":
+		service.FetchDailyHoroscope(string(core.Koc))
+	case "11":
+		service.FetchDailyHoroscope(string(core.Boga))
 	}
 }
 
