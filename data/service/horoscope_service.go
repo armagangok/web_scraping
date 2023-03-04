@@ -13,9 +13,9 @@ type ServiceImp struct {
 	contract.ServiceContract
 }
 
-func FetchDailyHoroscope(horoscopeType string) {
+func FetchDailyHoroscope(horoscopeType string, time string) {
 
-	url := core.GetUrl(horoscopeType)
+	url := core.GetUrl(horoscopeType, time)
 
 	response, httpError := http.Get(url)
 
@@ -23,7 +23,8 @@ func FetchDailyHoroscope(horoscopeType string) {
 		fmt.Println("ERROR: ", response.StatusCode)
 	} else {
 		document, readerError := goquery.NewDocumentFromReader(response.Body)
-		document.Find(".detail-content-inner").Each(func(i int, selection *goquery.Selection) {
+
+		document.Find(".medyanet-content").Each(func(i int, selection *goquery.Selection) {
 			title := selection.Find("p").Text()
 
 			fmt.Println(title)
