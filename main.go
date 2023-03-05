@@ -8,22 +8,20 @@ import (
 )
 
 func main() {
+
 	var horoscopeUserInput string
 	var horoscopeTimeUserInput string
 
 	for {
-		printMenu()
+		core.PrintMenu()
 		fmt.Scanln(&horoscopeUserInput)
 
-		printTimeMenu()
+		core.PrintTimeMenu()
 		fmt.Scanln(&horoscopeTimeUserInput)
 
-		a := chooseHoroscopeTime(horoscopeTimeUserInput)
+		timeUserInput := string(core.ChooseHoroscopeTime(horoscopeTimeUserInput))
 
-		print(a)
-		print("\n")
-
-		chooseHoroscope(horoscopeUserInput, horoscopeTimeUserInput)
+		chooseHoroscope(horoscopeUserInput, timeUserInput)
 	}
 }
 
@@ -55,64 +53,3 @@ func chooseHoroscope(first string, time string) {
 		service.FetchDailyHoroscope(string(core.Boga), time)
 	}
 }
-
-func chooseHoroscopeTime(time string) core.TimeType {
-	switch time {
-	case "0":
-		return core.Gunluk
-	case "1":
-		return core.Haftalik
-	case "2":
-		return core.Aylik
-	case "3":
-		return core.Yillik
-	}
-
-	return ""
-}
-
-func printMenu() {
-	horoscopeMenuText := `
-** Lütfen aşağıdaki burçlardan birini seçiniz.
-[0] Aslan 
-[1] Yay
-[2] Oglak
-[3] kova
-[4] İkizler
-[5] Yengeç
-[6] Başak
-[7] Balık
-[8] Akrep
-[9] Terazi
-[10] Koç
-[10] Boğa
->`
-
-	fmt.Println(horoscopeMenuText)
-
-}
-
-func printTimeMenu() {
-	timeMenuText := `
-** Lütfen aramak istediğiniz burcun zaman dilimini seçiniz.
-[0] Günlük
-[1] Haftalık
-[2] Aylık
-[3] Yıllık
->`
-	print(timeMenuText)
-}
-
-// fmt.Println("[0] Aslan ")
-// fmt.Println("[1] Yay")
-// fmt.Println("[2] Oglak")
-// fmt.Println("[3] kova")
-// fmt.Println("[4] İkizker")
-// fmt.Println("[5] Yengec")
-// fmt.Println("[6] Basak")
-// fmt.Println("[7] Balik")
-// fmt.Println("[8] Akrep")
-// fmt.Println("[9] Terazi")
-// fmt.Println("[10] Koc")
-// fmt.Println("[10] Boga")
-// fmt.Println("[Q/q/e] Exit")

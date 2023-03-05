@@ -25,3 +25,4 @@ const (
 	Aylik    TimeType = "aylik"
 	Haftalik TimeType = "haftalik"
 )
+

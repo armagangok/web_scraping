@@ -17,6 +17,8 @@ func FetchDailyHoroscope(horoscopeType string, time string) {
 
 	url := core.GetUrl(horoscopeType, time)
 
+	print(url)
+
 	response, httpError := http.Get(url)
 
 	if response.StatusCode != 200 {
@@ -24,12 +26,13 @@ func FetchDailyHoroscope(horoscopeType string, time string) {
 	} else {
 		document, readerError := goquery.NewDocumentFromReader(response.Body)
 
-		document.Find(".medyanet-content").Each(func(i int, selection *goquery.Selection) {
+		document.Find(".detail-content-inner").Each(func(i int, selection *goquery.Selection) {
 			title := selection.Find("p").Text()
 
 			fmt.Println(title)
 
 			print(readerError)
+
 		})
 	}
 
